@@ -2,6 +2,8 @@
 
 Auto translate textbox from Japanese to English or Indonesia
 
+![Screenshot](https://github.com/ajipw/priconne-auto-translate/blob/main/screenshot/ss1.png?raw=true)
+
 ## How to use
 
 - Install python first, Anaconda is recommended 
