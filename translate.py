@@ -42,7 +42,8 @@ class TranslateTool:
         response = request.json()
         print(json.dumps(response, sort_keys=True,
             ensure_ascii=False, indent=4, separators=(',', ': ')))
-        return response[0]['translations'][0]['text']
+        textted = [response[0]['translations'][0]['text']]
+        return textted
 
     def ibm(text):
         url = "https://www.ibm.com/demos/live/watson-language-translator/api/translate/text"
@@ -56,12 +57,12 @@ class TranslateTool:
         response = requests.request("POST", url,headers=headers, data=payload)
         data = response.json()
         print(data)
-
-        return data['payload']['translations'][0]['translation']
+        textted = [data['payload']['translations'][0]['translation']]
+        return textted
     
     def googleModule(text):
         translater = Translator(service_urls=['translate.google.com'])
-        translated = translater.translate(text=text, src="ja", dest="en").text
+        translated = [translater.translate(text=text, src="ja", dest="en").text]
         return translated
     
     def googleDict(text):
