@@ -280,6 +280,8 @@ while(True):
             select_red_offset = 10
             try:
                 select_red_draw.text((15, 10), "Selection Red : " + ''.join([a for a in sel_text_tl]), font=font, fill=(0, 0, 0, 0))
+                select_red_draw.text((15, 30), "Selection Blue : " + ''.join([a for a in sel_text_tl1]), font=font, fill=(0, 0, 0, 0))
+
             except:
                 select_red_draw.text((15, 30), "Selection Blue : " + ''.join([a for a in sel_text_tl1]), font=font, fill=(0, 0, 0, 0))
         except:
