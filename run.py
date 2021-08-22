@@ -230,8 +230,88 @@ while(True):
         text = translate(crop)
     except:
         pass
-    
+    try:
+        select_red = cv.rectangle(sel_red, (0, 0), (808, 113), (255, 255, 255), -1)
+        select_redd = Image.fromarray(select_red)
+        select_red_draw = ImageDraw.Draw(select_redd)
+        select_red_offset = 10
+    except:
+        pass
+    if sel_text == "" or sel_text_cmp  == sel_text or sel_text == "Initial..":
+        pass
+    else:
+        if args['translate'] == "disable":
+            # print(namee)
+            pass
+        elif args['translate'] == "googleDict":
+            sel_text_tl = TranslateTool.googleDict(sel_text)
+            print(''.join([a for a in sel_text_tl]))
+        elif args['translate'] == "googleModule":
+            text_tl = TranslateTool.googleModule(sel_text)
 
+        elif args['translate'] == "azure":
+            if AZURE_SUBKEY == "":
+                print("Azure Translate need Key! Set at appconfig.py")
+                exit()
+            elif AZURE_ENDPOINT == "":
+                print("Azure Translate need endpoint set! Change at appconfig.py")
+                exit()
+            elif AZURE_LOCATION == "":
+                print("Azure Translate need location set! Change at appconfig.py")
+                exit()
+            else:
+                sel_text_tl = TranslateTool.azure(sel_text)
+        elif args['translate'] == "ibm":
+            sel_text_tl = TranslateTool.ibm(sel_text)
+        else:
+            print("Need translate argument!")
+            exit()
+        try:
+            print(sel_text_tl)
+            select_red_draw.text((15, 10), "Selection Red : " + ''.join([a for a in sel_text_tl]), font=font, fill=(0, 0, 0, 0))
+        except:
+            pass
+        sel_text_cmp = sel_text
+        
+
+    if sel_text1 == "" or sel_text_cmp1 == sel_text1 or sel_text1 == "Initial..":
+        pass
+    else:
+        if args['translate'] == "disable":
+            # print(namee)
+            pass
+        elif args['translate'] == "googleDict":
+            sel_text_tl1 = TranslateTool.googleDict(sel_text1)
+            print(''.join([a for a in sel_text_tl]))
+        elif args['translate'] == "googleModule":
+            sel_text_tl1 = TranslateTool.googleModule(sel_text1)
+
+        elif args['translate'] == "azure":
+            if AZURE_SUBKEY == "":
+                print("Azure Translate need Key! Set at appconfig.py")
+                exit()
+            elif AZURE_ENDPOINT == "":
+                print("Azure Translate need endpoint set! Change at appconfig.py")
+                exit()
+            elif AZURE_LOCATION == "":
+                print("Azure Translate need location set! Change at appconfig.py")
+                exit()
+            else:
+                sel_text_tl1 = TranslateTool.azure(sel_text1)
+        elif args['translate'] == "ibm":
+            sel_text_tl1 = TranslateTool.ibm(sel_text1)
+        else:
+            print("Need translate argument!")
+            exit()
+        try:
+            print(sel_text_tl1)
+            select_red_draw.text((15, 30), "Selection Blue : " + ''.join([a for a in sel_text_tl1]), font=font, fill=(0, 0, 0, 0))
+        except:
+            pass
+        sel_text_cmp1 = sel_text1
+        
+
+    
     if text == "" or text1 == text: 
         pass
     else:
@@ -245,20 +325,6 @@ while(True):
             pass
         elif args['translate'] == "googleDict":
             text_tl = TranslateTool.googleDict(text)
-            try:
-                if sel_text == "" or sel_text_cmp  == sel_text or sel_text == "Initial..":
-                    pass
-                else:
-                    sel_text_tl = TranslateTool.googleDict(sel_text)
-                    print(sel_text_tl)
-                if sel_text1 == "" or sel_text_cmp1 == sel_text1 or sel_text1 == "Initial..":
-                    pass
-                else:
-                    sel_text_tl1 = TranslateTool.googleDict(sel_text1)
-                    print(sel_text_tl1)
-            except Exception as e:
-                # print(e)
-                pass
 
         elif args['translate'] == "googleModule":
             text_tl = TranslateTool.googleModule(text)
@@ -280,37 +346,7 @@ while(True):
         else:
             print("Need translate argument!")
             exit()
-        
-        
-        try:
-            select_red = cv.rectangle(sel_red, (0, 0), (808, 113), (255, 255, 255), -1)
-            select_redd = Image.fromarray(select_red)
-            select_red_draw = ImageDraw.Draw(select_redd)
-            select_red_offset = 10
-            try:
-                try:
-                    select_red_draw.text((15, 10), "Selection Red : " + ''.join([a for a in sel_text]), font=font, fill=(0, 0, 0, 0))
-                except:
-                    pass
 
-                try:
-                    select_red_draw.text((15, 30), "Selection Blue : " + ''.join([a for a in sel_text1]), font=font, fill=(0, 0, 0, 0))
-                except:
-                    pass
-
-                # for line in textwrap.wrap(sel_text_tl, width=80):
-
-                #     select_red_draw.text((15, select_red_offset), line, font=font, fill=(0, 0, 0, 0))
-                #     select_red_offset += font.getsize(line)[1]
-            except Exception as e:
-                # print(e)
-                pass
-            # cv.imshow("sel", sel_red)
-
-        except:
-            pass
-
-        
         
         # draw.text(position, coba, font=font, fill=(0, 0, 0, 0))
         try:
@@ -322,17 +358,16 @@ while(True):
             draw = ImageDraw.Draw(dd)
             offset = 10
             for texted in text_tl:
-            # for line in textwrap.wrap('\n'.join([a for a in text_tl]), width=80):
+                for line in textwrap.wrap( texted, width=80):
 
-                draw.text((15, offset), texted, font=font, fill=(0, 0, 0, 0))
-                offset += font.getsize(texted)[1]+5
+                    draw.text((15, offset), line, font=font, fill=(0, 0, 0, 0))
+                    offset += font.getsize(line)[1]
         except Exception as e:
             # print(e)
             pass
         
         text1 = text
-        sel_text_cmp1 = sel_text1
-        sel_text_cmp = sel_text
+        
         try:
             print(text)
         except:
