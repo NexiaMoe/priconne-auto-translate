@@ -80,4 +80,4 @@ class TranslateTool:
             except:
                 pass
         print (merged_text)
-        return '\n'.join([a for a in merged_text]) 
+        return merged_text

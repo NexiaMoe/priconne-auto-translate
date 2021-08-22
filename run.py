@@ -210,7 +210,7 @@ while(True):
  
         sel_text = translate(blackAndWhiteImage)
         print(sel_text)
-        cv.imshow("test", blackAndWhiteImage)
+        # cv.imshow("test", blackAndWhiteImage)
         # print(max_val2)
 
     if max_val3 >= 0.6:
@@ -246,12 +246,12 @@ while(True):
         elif args['translate'] == "googleDict":
             text_tl = TranslateTool.googleDict(text)
             try:
-                if sel_text == "" or sel_text == sel_text_cmp or sel_text == "Initial..":
+                if sel_text == "" or sel_text_cmp  == sel_text or sel_text == "Initial..":
                     pass
                 else:
                     sel_text_tl = TranslateTool.googleDict(sel_text)
                     print(sel_text_tl)
-                if sel_text1 == "" or sel_text1 == sel_text_cmp1 or sel_text1 == "Initial..":
+                if sel_text1 == "" or sel_text_cmp1 == sel_text1 or sel_text1 == "Initial..":
                     pass
                 else:
                     sel_text_tl1 = TranslateTool.googleDict(sel_text1)
@@ -289,12 +289,12 @@ while(True):
             select_red_offset = 10
             try:
                 try:
-                    select_red_draw.text((15, 10), "Selection Red : " + sel_text_tl, font=font, fill=(0, 0, 0, 0))
+                    select_red_draw.text((15, 10), "Selection Red : " + ''.join([a for a in sel_text]), font=font, fill=(0, 0, 0, 0))
                 except:
                     pass
 
                 try:
-                    select_red_draw.text((15, 30), "Selection Blue : " + sel_text_tl1, font=font, fill=(0, 0, 0, 0))
+                    select_red_draw.text((15, 30), "Selection Blue : " + ''.join([a for a in sel_text1]), font=font, fill=(0, 0, 0, 0))
                 except:
                     pass
 
@@ -320,11 +320,12 @@ while(True):
             
 
             draw = ImageDraw.Draw(dd)
-            offset = 30
-            for line in textwrap.wrap(text_tl, width=80):
+            offset = 10
+            for texted in text_tl:
+            # for line in textwrap.wrap('\n'.join([a for a in text_tl]), width=80):
 
-                draw.text((15, offset), line, font=font, fill=(0, 0, 0, 0))
-                offset += font.getsize(line)[1]
+                draw.text((15, offset), texted, font=font, fill=(0, 0, 0, 0))
+                offset += font.getsize(texted)[1]+5
         except Exception as e:
             # print(e)
             pass
@@ -345,9 +346,9 @@ while(True):
             output = np.array(dd)
 
             cv.imshow('Translated', output)
-        if max_val2 >= threshold:
-            output_red = np.array(select_redd)
-            cv.imshow('selection', output_red)
+        # if max_val2 >= threshold:
+        output_red = np.array(select_redd)
+        cv.imshow('selection', output_red)
         # cv.imshow("aa",screenshot)
         # cv.imshow("a1a",crop)
     except Exception as e:
