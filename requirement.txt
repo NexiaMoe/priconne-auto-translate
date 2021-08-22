@@ -1,0 +1,5 @@
+opencv-python
+pytesseract
+requests
+googletrans
+numpy
