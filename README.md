@@ -8,6 +8,7 @@ Auto translate textbox from Japanese to English or Indonesia
 - Install python depedency with command: ```pip install -r requirement.txt```
 - Install tesseract for windows, [Download here](https://digi.bib.uni-mannheim.de/tesseract/), select `tesseract-ocr-w64-setup-v5.0.0-alpha.20210811.exe`
 - Download japanese datapack at this repository
+- Copy trainneddata file to `C:\Program Files\Tesseract-OCR\tessdata`
 - Run Princess Connect Re:Dive
 - Run run.py with command : `python run.py --data fast --translate googleDict` or just `python run.py`
 
