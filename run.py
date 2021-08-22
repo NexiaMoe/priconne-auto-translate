@@ -280,10 +280,7 @@ while(True):
         else:
             print("Need translate argument!")
             exit()
-        try:
-            print(text1)
-        except:
-            pass
+        
         
         try:
             select_red = cv.rectangle(sel_red, (0, 0), (808, 113), (255, 255, 255), -1)
@@ -331,9 +328,14 @@ while(True):
         except Exception as e:
             # print(e)
             pass
+        
         text1 = text
         sel_text_cmp1 = sel_text1
         sel_text_cmp = sel_text
+        try:
+            print(text)
+        except:
+            pass
     
 
 
